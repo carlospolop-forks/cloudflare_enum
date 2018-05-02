@@ -122,7 +122,9 @@ class cloudflare_enum:
     def get_spreadsheet( self, domain ):
         dns_data = self.get_domain_dns( domain )
         if dns_data:
-            filename = domain.replace( ".", "_" ) + ".csv"
+            for record in dns_data:
+                print str(record["name"])+","+str(record["proxied"])+",",str(record["content"])
+            '''filename = domain.replace( ".", "_" ) + ".csv"
 
             with open( filename, 'wb' ) as csvfile:
                 dns_writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -130,7 +132,7 @@ class cloudflare_enum:
                 for record in dns_data:
                     dns_writer.writerow( [ record["name"], record["type"], record["content"] ] )
                 
-            self.statusmsg( "Spreadsheet created at " + os.getcwd() + "/" + filename )
+            self.statusmsg( "Spreadsheet created at " + os.getcwd() + "/" + filename )'''
 
     def print_banner( self ):
         if self.verbose:
